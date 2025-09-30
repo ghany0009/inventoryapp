@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 void main() {
   runApp(const MainApp());
@@ -15,4 +13,5 @@ class MainApp extends StatelessWidget {
       home: Scaffold(body: Center(child: Text('Hello World!'))),
     );
   }
+  void hola_mundo() {print("Hola Mundo");
 }
