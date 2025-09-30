@@ -48,9 +48,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
     if (provider.error == null) {
       Navigator.of(context).pop();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${provider.error}')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error: ${provider.error}')));
     }
   }
 
@@ -94,7 +94,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 TextFormField(
                   controller: _precioCtrl,
                   decoration: const InputDecoration(labelText: 'Precio'),
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
                   validator: (v) {
                     if (v == null || v.isEmpty) return 'Requerido';
                     if (double.tryParse(v) == null) return 'Número inválido';
@@ -105,7 +107,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 provider.isLoading
                     ? const CircularProgressIndicator()
                     : ElevatedButton(
-                        onPressed: _submit, child: const Text('Crear')),
+                        onPressed: _submit,
+                        child: const Text('Crear'),
+                      ),
               ],
             ),
           ),

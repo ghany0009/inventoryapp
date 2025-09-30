@@ -32,14 +32,14 @@ class InventarioPage extends StatelessWidget {
                 );
               },
             ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const ProductFormPage()),
-            );
-          },
-          child: const Icon(Icons.add),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (_) => const ProductFormPage()));
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
