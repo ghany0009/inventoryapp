@@ -17,9 +17,4 @@ class MainApp extends StatelessWidget {
       title: 'Inventario App',
     );
   }
-
-  void hola_mundo() {
-    print("Hola Mundo");
-  }
 }
-
