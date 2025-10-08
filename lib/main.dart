@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'UI/screens.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LoginPage(), //muestra el login al iniciar
-
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Inventario App',
+      title: 'Mi App',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const WelcomePage(),
+        '/profile': (context) => const LoginPage(),
+        '/products': (context) => const ProductsPage(),
+        '/config': (context) => const SettingsPage(),
+        '/welcome': (context) => const WelcomePage(),
+      },
     );
   }
 }
