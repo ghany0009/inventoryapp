@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,7 +11,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+      home: LoginPage(), //muestra el login al iniciar
+
+      debugShowCheckedModeBanner: false,
+      title: 'Inventario App',
     );
   }
 
@@ -18,3 +22,4 @@ class MainApp extends StatelessWidget {
     print("Hola Mundo");
   }
 }
+
