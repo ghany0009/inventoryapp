@@ -12,12 +12,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Mi aplicacion")),
-      body: cuerpo(context),
+      body: cuerpo(),
     );
   }
 }
 
-Widget cuerpo(BuildContext context) {
+Widget cuerpo() {
   return Container(
     decoration: BoxDecoration(
       image: DecorationImage(
@@ -34,7 +34,7 @@ Widget cuerpo(BuildContext context) {
           tituloLogIn(),
           campoUsuario(),
           campoContrasena(),
-          botonEntrar(context),
+          botonEntrar(),
         ],
       ),
     ),
@@ -79,14 +79,16 @@ Widget campoContrasena() {
   );
 }
 
-Widget botonEntrar(BuildContext context) {
+Widget botonEntrar() {
   return Padding(
     padding: const EdgeInsets.symmetric(
       horizontal: 40.0,
       vertical: 20.0,
     ), // márgenes
     child: TextButton(
-      onPressed: () => Navigator.pushNamed(context, '/products'),
+      onPressed: () {
+        // acción al presionar
+      },
       style: TextButton.styleFrom(
         backgroundColor: Colors.blue, // color de fondo
         foregroundColor: Colors.white, // color del texto

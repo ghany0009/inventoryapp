@@ -12,14 +12,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Mi App',
-      initialRoute: '/',
+      title: 'App Inventario',
+      home: WelcomePage(),
       routes: {
-        '/': (context) => const WelcomePage(),
-        '/profile': (context) => const LoginPage(),
+        '/login': (context) => const LoginPage(),
         '/products': (context) => const ProductsPage(),
-        '/config': (context) => const SettingsPage(),
+        '/settings': (context) => const SettingsPage(),
         '/welcome': (context) => const WelcomePage(),
+        '/history': (context) => const HistoryPage(),
       },
     );
   }
