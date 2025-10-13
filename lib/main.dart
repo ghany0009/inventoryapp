@@ -8,7 +8,7 @@ import 'firebase_options.dart';
 import 'providers/product_provider.dart';
 
 //     Pantallas de la app
-import 'login_page.dart';                     // pantalla de login (ya la tienes)
+import 'UI/screens.dart'; // pantalla de login (ya la tienes)
 //import 'presentation/pages/product_list_page.dart'; // pantalla principal tras login
 
 void main() async {
@@ -17,20 +17,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Inicializamos Firebase con la configuración adecuada para la plataforma
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Finalmente lanzamos la aplicación
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     //     Registramos todos los providers que vamos a usar.
     //     En este caso solo necesitamos ProductProvider,
     //     pero puedes añadir más (AuthProvider, SettingsProvider,…)
@@ -44,28 +41,15 @@ class MainApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Inventario App',
-
-        
-        //     Ruta inicial → pantalla de login.
-        //     Después de que el login sea exitoso, navegas a
-        //     ProductListPage (lista de productos) usando
-        //     Navigator.pushReplacement o un named route.
-        home: const LoginPage(),
-
-        
-        //     Opcional: definir rutas nombradas para que
-        //     la navegación sea más clara.
+        title: 'App Inventario',
+        home: WelcomePage(),
         routes: {
-          // '/home' → pantalla principal con la lista de productos
-          // '/home': (_) => const ProductListPage(),
-          // Puedes añadir más rutas (detalle, formulario, etc.)
-          // '/detail': (_) => const ProductDetailPage(),
-          // '/form'  : (_) => const ProductFormPage(),
+          '/login': (context) => const LoginPage(),
+          '/products': (context) => const ProductsPage(),
+          '/settings': (context) => const SettingsPage(),
+          '/welcome': (context) => const WelcomePage(),
+          '/history': (context) => const HistoryPage(),
         },
-
-        // -------------------------------------------------
-        // 7️⃣  Tema (personaliza a tu gusto)
         theme: ThemeData(
           primarySwatch: Colors.indigo,
           visualDensity: VisualDensity.adaptivePlatformDensity,
