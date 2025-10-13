@@ -43,12 +43,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCQaUfr9Oxky9dyDjhonTTMWwaUefoBBdk',
-    appId: '1:1014328533077:web:ea222cc965ac3dec7534dc',
+    appId: '1:1014328533077:web:5e96a934ed0856287534dc',
     messagingSenderId: '1014328533077',
     projectId: 'appinventario-de2e8',
     authDomain: 'appinventario-de2e8.firebaseapp.com',
     storageBucket: 'appinventario-de2e8.firebasestorage.app',
-    measurementId: 'G-LLNYZZSC9F',
+    measurementId: 'G-SQLDVP35ZJ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -65,6 +65,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1014328533077',
     projectId: 'appinventario-de2e8',
     storageBucket: 'appinventario-de2e8.firebasestorage.app',
+    iosClientId: '1014328533077-g0i3ksj8titc8hrj7brmd3j8ca18d7ks.apps.googleusercontent.com',
     iosBundleId: 'com.example.inventoryapp',
   );
 
@@ -74,6 +75,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1014328533077',
     projectId: 'appinventario-de2e8',
     storageBucket: 'appinventario-de2e8.firebasestorage.app',
+    iosClientId: '1014328533077-g0i3ksj8titc8hrj7brmd3j8ca18d7ks.apps.googleusercontent.com',
     iosBundleId: 'com.example.inventoryapp',
   );
 
@@ -86,6 +88,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'appinventario-de2e8.firebasestorage.app',
     measurementId: 'G-SQLDVP35ZJ',
   );
+
   hola_mundo() {
     print("Hola Mundo");
   }

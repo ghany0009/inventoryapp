@@ -6,13 +6,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => Navigator.pushNamed(context, '/profile'),
-          child: const Text('Iniciar Sesión'),
-        ),
-      ),
+      body: Center(child: Text("Ajustes", style: TextStyle(fontSize: 40))),
     );
   }
 }

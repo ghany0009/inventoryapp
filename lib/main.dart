@@ -1,6 +1,7 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:inventoryapp/UI/pages/selection_page.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
@@ -43,13 +44,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'App Inventario',
         home: WelcomePage(),
+
+        //Rutas esco
         routes: {
           '/login': (context) => const LoginPage(),
-          '/products': (context) => const ProductsPage(),
-          '/settings': (context) => const SettingsPage(),
           '/welcome': (context) => const WelcomePage(),
-          '/history': (context) => const HistoryPage(),
+          '/selection': (context) => const SelectionPage(),
         },
+
         theme: ThemeData(
           primarySwatch: Colors.indigo,
           visualDensity: VisualDensity.adaptivePlatformDensity,
