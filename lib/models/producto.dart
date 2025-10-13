@@ -1,10 +1,10 @@
 import 'package:inventoryapp/models/modelo.dart';
 
 class Producto {
-  final String id;                 // id del documento en Firestore
+  final String id; // id del documento en Firestore
   final String nombre;
   final double precio;
-  final List<Modelo> modelos;      // composición → lista de variantes
+  final List<Modelo> modelos; // composición → lista de variantes
 
   Producto({
     required this.id,
@@ -13,8 +13,8 @@ class Producto {
     required this.modelos,
   });
 
-    /// Crea una instancia cambiando solo los campos indicados
-   Producto copyWith({
+  /// Crea una instancia cambiando solo los campos indicados
+  Producto copyWith({
     String? id,
     String? nombre,
     double? precio,
@@ -27,7 +27,7 @@ class Producto {
       modelos: modelos ?? this.modelos,
     );
   }
- //  FACTORY FROM FIRESTORE (des‑serialización)
+  //  FACTORY FROM FIRESTORE (des‑serialización)
 
   factory Producto.fromFirestore(String id, Map<String, dynamic> data) {
     return Producto(
@@ -40,12 +40,13 @@ class Producto {
     );
   }
 
-  
+  get name => null;
+
   //  TO MAP (serialización)
 
   Map<String, dynamic> toMap() => {
-        'nombre': nombre,
-        'precio': precio,
-        'modelos': modelos.map((m) => m.toMap()).toList(),
-      };
+    'nombre': nombre,
+    'precio': precio,
+    'modelos': modelos.map((m) => m.toMap()).toList(),
+  };
 }

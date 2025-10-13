@@ -12,12 +12,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Mi aplicacion")),
-      body: cuerpo(),
+      body: cuerpo(context),
     );
   }
 }
 
-Widget cuerpo() {
+Widget cuerpo(BuildContext context) {
   return Container(
     decoration: BoxDecoration(
       image: DecorationImage(
@@ -34,7 +34,7 @@ Widget cuerpo() {
           tituloLogIn(),
           campoUsuario(),
           campoContrasena(),
-          botonEntrar(),
+          botonEntrar(context),
         ],
       ),
     ),
@@ -79,23 +79,18 @@ Widget campoContrasena() {
   );
 }
 
-Widget botonEntrar() {
+Widget botonEntrar(BuildContext context) {
   return Padding(
-    padding: const EdgeInsets.symmetric(
-      horizontal: 40.0,
-      vertical: 20.0,
-    ), // márgenes
+    padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
     child: TextButton(
       onPressed: () {
-        // acción al presionar
+        Navigator.pushNamed(context, '/selection'); // acción correcta
       },
       style: TextButton.styleFrom(
-        backgroundColor: Colors.blue, // color de fondo
-        foregroundColor: Colors.white, // color del texto
-        padding: const EdgeInsets.symmetric(vertical: 15.0), // padding interno
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), // esquinas redondeadas
-        ),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(vertical: 15.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: const Text("Enviar", style: TextStyle(fontSize: 18)),
     ),

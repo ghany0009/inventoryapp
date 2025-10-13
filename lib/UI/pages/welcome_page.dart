@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:inventoryapp/UI/screens.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -76,12 +75,7 @@ class WelcomePage extends StatelessWidget {
 
                   // Boton
                   GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ),
-                    ),
+                    onTap: () => Navigator.pushNamed(context, '/login'),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
