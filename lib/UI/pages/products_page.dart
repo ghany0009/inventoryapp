@@ -32,10 +32,11 @@ class _ProductsPageState extends State<ProductsPage> {
               final doc = productos[index];
               final nombre = doc['nombre'] ?? '';
               final stock = doc['stock'] ?? 0;
+              final precio = doc['precio'] ?? 0;
 
               return Container(
                 margin: const EdgeInsets.symmetric(vertical: 8),
-                padding: const EdgeInsets.all(40),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.blue[50],
                   borderRadius: BorderRadius.circular(12),
@@ -52,9 +53,23 @@ class _ProductsPageState extends State<ProductsPage> {
                       ),
                     ),
 
-                    Text(
-                      "$stock unidades",
-                      style: const TextStyle(fontSize: 16, color: Colors.grey),
+                    Column(
+                      children: [
+                        Text(
+                          "$stock ${stock == 1 ? 'unidad' : 'unidades'}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          " ${precio.toStringAsFixed(2).replaceAll('.', ',')} €/ud.",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
