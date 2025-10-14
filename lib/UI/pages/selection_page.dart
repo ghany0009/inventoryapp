@@ -30,18 +30,19 @@ class _SelectionPageState extends State<SelectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF892BE2),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.category_rounded, color: Color(0xFF892BE2), size: 50),
+            Icon(Icons.category_rounded, color: Colors.white, size: 50),
             const SizedBox(width: 8),
             const Text(
               " App Inventario",
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 41, 0, 112),
+                color: Colors.white,
               ),
             ),
           ],
@@ -50,10 +51,23 @@ class _SelectionPageState extends State<SelectionPage> {
       ),
       body: _pages[_selectedIndex], // Muestra la página seleccionada
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Color(0xFF892BE2),
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: const Color(0xFFDAB6FF),
+        unselectedItemColor: Colors.white70,
+        selectedLabelStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          height: 1.5,
+        ),
+        unselectedLabelStyle: const TextStyle(
+          color: Colors.white70,
+          fontSize: 20,
+          height: 1.5,
+        ),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inventario'),
           BottomNavigationBarItem(
