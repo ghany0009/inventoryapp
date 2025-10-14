@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:inventoryapp/UI/theme/app_theme.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
