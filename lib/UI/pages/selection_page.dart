@@ -13,7 +13,6 @@ class SelectionPage extends StatefulWidget {
 class _SelectionPageState extends State<SelectionPage> {
   int _selectedIndex = 0;
 
-  // Páginas de ejemplo
   final List<Widget> _pages = [
     const ProductsPage(),
     const HistoryPage(),
@@ -30,17 +29,13 @@ class _SelectionPageState extends State<SelectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF892BE2),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.category_rounded, size: 50),
+            Icon(Icons.category_rounded, size: 30),
             const SizedBox(width: 8),
-            const Text(
-              " App Inventario",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
+            const Text(" App Inventario"),
           ],
         ),
         automaticallyImplyLeading: false,

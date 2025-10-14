@@ -11,6 +11,7 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
+    final onSurface = Theme.of(context).colorScheme.onSurface;
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection("productos").snapshots(),
@@ -20,7 +21,9 @@ class _ProductsPageState extends State<ProductsPage> {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('Sin productos'));
+            return Center(
+              child: Text('Sin productos', style: TextStyle(color: onSurface)),
+            );
           }
 
           final productos = snapshot.data!.docs;
@@ -37,10 +40,9 @@ class _ProductsPageState extends State<ProductsPage> {
               return Container(
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 padding: const EdgeInsets.all(20),
+
                 decoration: BoxDecoration(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.primary.withValues(), // Un color suave del tema
+                  color: onSurface.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -48,9 +50,10 @@ class _ProductsPageState extends State<ProductsPage> {
                     Expanded(
                       child: Text(
                         nombre,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
+                          color: onSurface,
                         ),
                       ),
                     ),
@@ -59,17 +62,15 @@ class _ProductsPageState extends State<ProductsPage> {
                       children: [
                         Text(
                           "$stock ${stock == 1 ? 'unidad' : 'unidades'}",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey,
+
+                            color: onSurface.withValues(alpha: 0.7),
                           ),
                         ),
                         Text(
                           " ${precio.toStringAsFixed(2).replaceAll('.', ',')} €/ud.",
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                          ),
+                          style: TextStyle(fontSize: 16, color: onSurface),
                         ),
                       ],
                     ),

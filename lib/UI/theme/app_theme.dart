@@ -1,73 +1,99 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // --- Colores base ---
-  static const Color primaryPurple = Color(0xFF892BE2);
-  static const Color darkPurple = Color.fromARGB(255, 41, 0, 112);
-  static const Color lightPurpleAccent = Color(0xFFDAB6FF);
+  static const Color primaryColor = Color(0xFF0D47A1);
+  static const Color primaryDarkColor = Color(0xFF4FC3F7);
+  static const Color accentColor = Color(0xFF00BCD4);
+  static const Color textDarkColor = Color(0xFFEAEAEA);
+  static const Color backgroundLight = Color(0xFFF5F5F5);
+  static const Color backgroundDark = Color(0xFF121212);
+  static const Color darkSurface = Color(0xFF1E1E1E);
 
-  // --- TEMA CLARO ---
+  //Para cambiar el style del login_page
+  static final InputDecorationTheme _inputDecorationTheme =
+      InputDecorationTheme(
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        hintStyle: const TextStyle(fontSize: 16, color: Colors.grey),
+      );
+
+  // TEMA CLARO
+
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: primaryPurple,
-    scaffoldBackgroundColor: Colors.grey[200],
-    appBarTheme: const AppBarTheme(
-      backgroundColor: primaryPurple,
+    primaryColor: primaryColor,
+    scaffoldBackgroundColor: backgroundLight,
+
+    appBarTheme: AppBarTheme(
+      backgroundColor: primaryColor,
       foregroundColor: Colors.white,
+      elevation: 0,
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: primaryPurple,
-      selectedItemColor: lightPurpleAccent,
+
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: primaryColor,
+      brightness: Brightness.light,
+      primary: primaryColor,
+      secondary: accentColor,
+      onSurface: Colors.black,
+    ),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: primaryColor,
+      selectedItemColor: accentColor,
       unselectedItemColor: Colors.white70,
     ),
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: primaryPurple,
-      brightness: Brightness.light,
-      primary: primaryPurple,
-      secondary: lightPurpleAccent,
-    ),
-    // Configura otros widgets si es necesario
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        backgroundColor: primaryPurple,
-        foregroundColor: Colors.white,
-      ),
-    ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: primaryPurple,
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: accentColor,
       foregroundColor: Colors.white,
+    ),
+
+    inputDecorationTheme: _inputDecorationTheme.copyWith(
+      fillColor: Colors.white,
+      hintStyle: const TextStyle(color: Colors.black54),
     ),
   );
 
-  // --- TEMA OSCURO ---
+  //TEMA OSCURO
+
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: darkPurple,
-    scaffoldBackgroundColor: Colors.grey[900],
-    appBarTheme: const AppBarTheme(
-      backgroundColor: darkPurple,
-      foregroundColor: Colors.white,
+    primaryColor: primaryDarkColor,
+    scaffoldBackgroundColor: backgroundDark,
+
+    appBarTheme: AppBarTheme(
+      backgroundColor: darkSurface,
+      foregroundColor: textDarkColor,
+      elevation: 0,
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: darkPurple,
-      selectedItemColor: lightPurpleAccent,
+
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: primaryColor,
+      brightness: Brightness.dark,
+      primary: primaryDarkColor,
+      secondary: accentColor,
+      onSurface: textDarkColor,
+      surface: darkSurface,
+    ),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: darkSurface,
+      selectedItemColor: primaryDarkColor,
       unselectedItemColor: Colors.white70,
     ),
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: darkPurple,
-      brightness: Brightness.dark,
-      primary: lightPurpleAccent,
-      secondary: primaryPurple,
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: accentColor,
+      foregroundColor: Colors.white,
     ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        backgroundColor: lightPurpleAccent,
-        foregroundColor: darkPurple,
-      ),
-    ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: lightPurpleAccent,
-      foregroundColor: darkPurple,
+
+    inputDecorationTheme: _inputDecorationTheme.copyWith(
+      fillColor: darkSurface,
+      hintStyle: TextStyle(color: Colors.grey[500]),
     ),
   );
 }

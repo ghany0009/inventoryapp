@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               title: 'App Inventario',
               debugShowCheckedModeBanner: false,
+
               // Configuración del tema
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,

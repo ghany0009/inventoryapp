@@ -40,7 +40,7 @@ class Producto {
     );
   }
 
-  get name => null;
+  Null get name => null;
 
   //  TO MAP (serialización)
 
