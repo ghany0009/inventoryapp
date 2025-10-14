@@ -11,7 +11,25 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Mi aplicacion")),
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.category_rounded, color: Color(0xFF892BE2), size: 50),
+            const SizedBox(width: 8),
+            const Text(
+              " App Inventario",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 41, 0, 112),
+              ),
+            ),
+          ],
+        ),
+        automaticallyImplyLeading: false,
+      ),
       body: cuerpo(context),
     );
   }

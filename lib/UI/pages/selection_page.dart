@@ -46,6 +46,7 @@ class _SelectionPageState extends State<SelectionPage> {
             ),
           ],
         ),
+        automaticallyImplyLeading: false,
       ),
       body: _pages[_selectedIndex], // Muestra la página seleccionada
       bottomNavigationBar: BottomNavigationBar(
