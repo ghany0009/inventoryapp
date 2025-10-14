@@ -35,15 +35,11 @@ class _SelectionPageState extends State<SelectionPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.category_rounded, color: Colors.white, size: 50),
+            Icon(Icons.category_rounded, size: 50),
             const SizedBox(width: 8),
             const Text(
               " App Inventario",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -52,11 +48,8 @@ class _SelectionPageState extends State<SelectionPage> {
       body: _pages[_selectedIndex], // Muestra la página seleccionada
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFF892BE2),
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: const Color(0xFFDAB6FF),
-        unselectedItemColor: Colors.white70,
         selectedLabelStyle: const TextStyle(
           color: Colors.white,
           fontSize: 20,

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:inventoryapp/UI/theme/app_theme.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -24,16 +25,19 @@ class WelcomePage extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.category_rounded,
-                          color: Color(0xFF892BE2),
+                          color: theme.colorScheme.primary,
                           size: 50,
                         ),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           " App Inventario",
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 41, 0, 112),
+                            color: theme.brightness == Brightness.light
+                                ? AppTheme
+                                      .darkPurple // Mantener el morado oscuro en modo claro
+                                : Colors.white,
                           ),
                         ),
                       ],
@@ -51,12 +55,12 @@ class WelcomePage extends StatelessWidget {
                   const SizedBox(height: 50),
 
                   // Título
-                  const Text(
+                  Text(
                     'Bienvenido a "Nombre de prueba para aplicacion"',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Roboto',
-                      color: Color(0xFF892BE2),
+                      color: theme.colorScheme.primary,
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
                     ),
@@ -79,7 +83,7 @@ class WelcomePage extends StatelessWidget {
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Color(0xFF892BE2),
+                        color: theme.colorScheme.primary,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.all(20),

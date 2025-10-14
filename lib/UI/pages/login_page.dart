@@ -104,12 +104,6 @@ Widget botonEntrar(BuildContext context) {
       onPressed: () {
         Navigator.pushNamed(context, '/selection'); // acción correcta
       },
-      style: TextButton.styleFrom(
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 15.0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
       child: const Text("Enviar", style: TextStyle(fontSize: 18)),
     ),
   );

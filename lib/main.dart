@@ -1,16 +1,11 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:inventoryapp/UI/pages/selection_page.dart';
+import 'package:inventoryapp/providers/product_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:inventoryapp/providers/theme_provider.dart';
 import 'firebase_options.dart';
-
-//     Nuestro provider que gestiona los productos
-import 'providers/product_provider.dart';
-
-//     Pantallas de la app
-import 'UI/screens.dart'; // pantalla de login (ya la tienes)
-//import 'presentation/pages/product_list_page.dart'; // pantalla principal tras login
+import 'package:firebase_core/firebase_core.dart';
+// Importar paginas y temas
+import 'package:inventoryapp/UI/screens.dart';
 
 void main() async {
   // -------------------------------------------------
@@ -40,21 +35,28 @@ class MyApp extends StatelessWidget {
         // Ejemplo de cómo añadir otro provider:
         // ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'App Inventario',
-        home: WelcomePage(),
+      child: ChangeNotifierProvider(
+        create: (_) => ThemeProvider(),
+        child: Consumer<ThemeProvider>(
+          builder: (context, themeProvider, child) {
+            return MaterialApp(
+              title: 'App Inventario',
+              debugShowCheckedModeBanner: false,
+              // Configuración del tema
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: themeProvider.themeMode,
 
-        //Rutas esco
-        routes: {
-          '/login': (context) => const LoginPage(),
-          '/welcome': (context) => const WelcomePage(),
-          '/selection': (context) => const SelectionPage(),
-        },
-
-        theme: ThemeData(
-          primarySwatch: Colors.indigo,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+              // Rutas de tu aplicación
+              initialRoute: '/',
+              routes: {
+                '/': (context) => const WelcomePage(),
+                '/login': (context) => const LoginPage(),
+                '/selection': (context) => const SelectionPage(),
+                // ...otras rutas
+              },
+            );
+          },
         ),
       ),
     );

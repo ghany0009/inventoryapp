@@ -38,7 +38,9 @@ class _ProductsPageState extends State<ProductsPage> {
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.blue[50],
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(), // Un color suave del tema
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
