@@ -13,7 +13,6 @@ class SelectionPage extends StatefulWidget {
 class _SelectionPageState extends State<SelectionPage> {
   int _selectedIndex = 0;
 
-  // Páginas de ejemplo
   final List<Widget> _pages = [
     const ProductsPage(),
     const HistoryPage(),
@@ -34,25 +33,29 @@ class _SelectionPageState extends State<SelectionPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.category_rounded, color: Color(0xFF892BE2), size: 50),
+            Icon(Icons.category_rounded, size: 30),
             const SizedBox(width: 8),
-            const Text(
-              " App Inventario",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 41, 0, 112),
-              ),
-            ),
+            const Text(" App Inventario"),
           ],
         ),
+        automaticallyImplyLeading: false,
       ),
       body: _pages[_selectedIndex], // Muestra la página seleccionada
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        selectedLabelStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          height: 1.5,
+        ),
+        unselectedLabelStyle: const TextStyle(
+          color: Colors.white70,
+          fontSize: 20,
+          height: 1.5,
+        ),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inventario'),
           BottomNavigationBarItem(
