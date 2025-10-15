@@ -4,13 +4,15 @@ class Producto {
   final String id; // id del documento en Firestore
   final String nombre;
   final double precio;
-  final List<Modelo> modelos; // composición → lista de variantes
+  final List<Modelo> modelos;
+  final int stock; // composición → lista de variantes
 
   Producto({
     required this.id,
     required this.nombre,
     required this.precio,
     required this.modelos,
+    this.stock = 0,
   });
 
   /// Crea una instancia cambiando solo los campos indicados
@@ -19,12 +21,14 @@ class Producto {
     String? nombre,
     double? precio,
     List<Modelo>? modelos,
+    int? stock,
   }) {
     return Producto(
       id: id ?? this.id,
       nombre: nombre ?? this.nombre,
       precio: precio ?? this.precio,
       modelos: modelos ?? this.modelos,
+      stock: stock ?? this.stock,
     );
   }
   //  FACTORY FROM FIRESTORE (des‑serialización)
@@ -37,6 +41,7 @@ class Producto {
       modelos: (data['modelos'] as List<dynamic>)
           .map((m) => Modelo.fromMap(m as Map<String, dynamic>))
           .toList(),
+      stock: data['stock'] ?? 0,
     );
   }
 
@@ -48,5 +53,6 @@ class Producto {
     'nombre': nombre,
     'precio': precio,
     'modelos': modelos.map((m) => m.toMap()).toList(),
+    'stock': stock,
   };
 }

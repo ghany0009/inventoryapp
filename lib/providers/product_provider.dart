@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import '../models/producto.dart';
 import '../repositorio/product_repository.dart';
+import '../models/movimiento.dart'; // <-- AÑADE IMPORTACIÓN
+import '../repositorio/history_repository.dart';
 
 class ProductProvider with ChangeNotifier {
   final ProductRepository _repo = ProductRepository();
+  final HistoryRepository _historyRepo = HistoryRepository();
 
   // Estado
   List<Producto> _products = [];
@@ -41,7 +44,7 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
     try {
       final id = await _repo.createProduct(product);
-      // El producto recien creado tiene id vacio; 
+      // El producto recien creado tiene id vacio;
       //le asignamos el id que devuelve firestore
       _products.add(product.copyWith(id: id));
     } catch (e) {
@@ -80,6 +83,48 @@ class ProductProvider with ChangeNotifier {
     } finally {
       _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  // --- LÓGICA DE STOCK E HISTORIAL ---
+  Future<void> updateStock({
+    required Producto producto,
+    required int cantidad,
+    required TipoMovimiento tipo,
+  }) async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      // 1. Calcular el nuevo stock
+      final nuevoStock = (tipo == TipoMovimiento.entrada)
+          ? producto.stock + cantidad
+          : producto.stock - cantidad;
+
+      if (nuevoStock < 0) {
+        throw Exception("El stock no puede ser negativo.");
+      }
+
+      // 2. Crear el objeto de movimiento para el historial
+      final movimiento = Movimiento(
+        id: '', // Firestore lo genera automáticamente
+        productoId: producto.id,
+        productoNombre: producto.nombre,
+        tipo: tipo,
+        cantidad: cantidad,
+        fecha: DateTime.now(),
+      );
+
+      // 3. Actualizar el producto con el nuevo stock
+      await _repo.updateProduct(producto.copyWith(stock: nuevoStock));
+
+      // 4. Añadir el registro al historial
+      await _historyRepo.addMovement(movimiento);
+    } catch (e) {
+      _error = 'Error al actualizar stock: $e';
+    } finally {
+      _isLoading = false;
+      notifyListeners(); // La UI se actualizará por el stream, pero notificamos por si acaso
     }
   }
 }
