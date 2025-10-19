@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:inventoryapp/providers/product_provider.dart';
+import 'package:inventoryapp/models/producto.dart';
+import 'package:provider/provider.dart';
+import 'package:inventoryapp/UI/pages/edit_products_page.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -9,6 +13,7 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
+  Producto? _selected; // Variable para rastrear el producto seleccionado
   @override
   Widget build(BuildContext context) {
     final onSurface = Theme.of(context).colorScheme.onSurface;
@@ -104,36 +109,67 @@ class _ProductsPageState extends State<ProductsPage> {
             right: 16,
             child: Row(
               children: [
+               
+               
                 // Botón Eliminar
                 FloatingActionButton(
                   heroTag: 'eliminar_fab', // Tag único para cada FAB
-                  onPressed: () {
-                    print('Eliminar presionado');
-                    // Lógica para eliminar (requiere seleccionar un producto)
-                  },
                   backgroundColor: Colors.red,
+                  onPressed: _selected == null //<= nombre de la variable de selección                  _selected == null //<= nombre de la variable de selección
+                  ? null      //boton gris si no responde
+                  : () async {
+                                     
+                   //obtener la instancia del provider
+                   final productProvider = context.read<ProductProvider>();
+
+                   await productProvider.deleteProduct(_selected!.id!);
+                   //Borra el doc en Firestore via provider
+                   
+                   setState(() => _selected = null);
+                    // Limpiar selección visual después de eliminar
+                    
+                  },
                   child: const Icon(Icons.delete),
+                  
                 ),
                 const SizedBox(width: 10),
 
                 // Botón Editar
                 FloatingActionButton(
                   heroTag: 'editar_fab',
-                  onPressed: () {
-                    print('Editar presionado');
-                    // Lógica para editar (requiere seleccionar un producto)
+                   backgroundColor: Colors.orange,
+                  onPressed:
+                  _selected == null
+                   ? null     //deshabilita el boton (lo pone gris)cuando el usuario no selecciona producto
+                    : () async{
+                      // Navegar a la pantalla de edición con el producto seleccionado
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => EditProductPage(product: _selected!),
+                        ),
+                      );
+                      // Al volver, limpiamos la selección
+                      setState(() => _selected = null); 
+                    
                   },
-                  backgroundColor: Colors.orange,
                   child: const Icon(Icons.edit),
+                 
                 ),
                 const SizedBox(width: 10),
 
                 // Botón Crear
                 FloatingActionButton(
                   heroTag: 'crear_fab',
-                  onPressed: () {
+                  onPressed: () async {
                     print('Crear presionado');
-                    // Lógica para navegar a la pantalla de creación
+                    //navegamos a la pantalla de creación
+                     await Navigator.push(
+                        context,
+                          MaterialPageRoute(
+                            builder: (_) => const EditProductPage(),  // <== Pantalla de creación
+                          ),
+                        );
                   },
                   backgroundColor: primary,
                   child: const Icon(Icons.add),

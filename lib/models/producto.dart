@@ -1,20 +1,22 @@
 import 'package:inventoryapp/models/modelo.dart';
 
 class Producto {
-  final String id; // id del documento en Firestore
+  final String? id; // id del documento en Firestore, la ? hace que sea opcional
   final String nombre;
   final double precio;
   final List<Modelo> modelos;
-  final int stock; // composición → lista de variantes
+  final int stock; // composición → lista de variantes, valor por defecto 0
 
   Producto({
-    required this.id,
+    this.id,   // opcional para nuevos productos
     required this.nombre,
     required this.precio,
     required this.modelos,
     this.stock = 0,
   });
 
+  String get name => nombre;  // getter para obtener el nombre, antes devolvia null
+  
   /// Crea una instancia cambiando solo los campos indicados
   Producto copyWith({
     String? id,
@@ -27,27 +29,32 @@ class Producto {
       id: id ?? this.id,
       nombre: nombre ?? this.nombre,
       precio: precio ?? this.precio,
-      modelos: modelos ?? this.modelos,
+      // Creamos una copia de la lista para evitar efectos secundarios
+      modelos: modelos ?? List<Modelo>.from(this.modelos),
       stock: stock ?? this.stock,
     );
   }
   //  FACTORY FROM FIRESTORE (des‑serialización)
 
   factory Producto.fromFirestore(String id, Map<String, dynamic> data) {
+
+    // Seguridad ante campos ausentes o nulos
+    final rawModelos = data['modelos'] as List<dynamic>? ?? [];
+
     return Producto(
       id: id,
-      nombre: data['nombre'] as String,
-      precio: (data['precio'] as num).toDouble(),
-      modelos: (data['modelos'] as List<dynamic>)
+      nombre: data['nombre'] as String? ?? '',
+      precio: (data['precio'] as num?)?.toDouble() ?? 0.0,
+      modelos: rawModelos      
           .map((m) => Modelo.fromMap(m as Map<String, dynamic>))
           .toList(),
       stock: data['stock'] ?? 0,
     );
   }
 
-  Null get name => null;
+  
 
-  //  TO MAP (serialización)
+  //  TO MAP (serialización) para guardar en Firestore
 
   Map<String, dynamic> toMap() => {
     'nombre': nombre,
