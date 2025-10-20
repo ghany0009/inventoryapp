@@ -3,23 +3,24 @@
 // ignore_for_file: type=lint
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
-    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+    show defaultTargetPlatform, TargetPlatform;
 
-/// Default [FirebaseOptions] for use with your Firebase apps.
-///
-/// Example:
-/// ```dart
-/// import 'firebase_options.dart';
-/// // ...
-/// await Firebase.initializeApp(
-///   options: DefaultFirebaseOptions.currentPlatform,
-/// );
-/// ```
+ ///Default [FirebaseOptions] for use with your Firebase apps.
+
+ ///Example:
+ ///```dart
+ ///import 'firebase_options.dart';
+ ///...
+ ///await Firebase.initializeApp(
+ /// options: DefaultFirebaseOptions.currentPlatform,
+ ///);
+ ///```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    if (kIsWeb) {
-      return web;
-    }
+    // <-- la rama web está comentada/eliminada
+    // if (kIsWeb) {
+    //   return web;
+    // }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
@@ -41,15 +42,16 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCQaUfr9Oxky9dyDjhonTTMWwaUefoBBdk',
-    appId: '1:1014328533077:web:5e96a934ed0856287534dc',
-    messagingSenderId: '1014328533077',
-    projectId: 'appinventario-de2e8',
-    authDomain: 'appinventario-de2e8.firebaseapp.com',
-    storageBucket: 'appinventario-de2e8.firebasestorage.app',
-    measurementId: 'G-SQLDVP35ZJ',
-  );
+  // <-- opcional: eliminar este bloque si nunca compilarás para web
+  // static const FirebaseOptions web = FirebaseOptions(
+  //   apiKey: '...',
+  //   appId: '...',
+  //   messagingSenderId: '...',
+  //   projectId: '...',
+  //   authDomain: '...',
+  //   storageBucket: '...',
+  //   measurementId: '...',
+  // );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCGosmJK2dZUzFErTAG9JwiaYM_tUXvTuU',
@@ -61,21 +63,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBmCzc-QBzNbVbovJMrsmz6yP-jk7i38O8',
-    appId: '1:1014328533077:ios:d9acb4409898918e7534dc',
+    appId: '1:1014328533077:ios:d9acb440989891e7534dc',
     messagingSenderId: '1014328533077',
     projectId: 'appinventario-de2e8',
     storageBucket: 'appinventario-de2e8.firebasestorage.app',
-    iosClientId: '1014328533077-g0i3ksj8titc8hrj7brmd3j8ca18d7ks.apps.googleusercontent.com',
+    iosClientId:
+        '1014328533077-g0i3ksj8titc8hrj7brmd3j8ca18d7ks.apps.googleusercontent.com',
     iosBundleId: 'com.example.inventoryapp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyBmCzc-QBzNbVbovJMrsmz6yP-jk7i38O8',
-    appId: '1:1014328533077:ios:d9acb4409898918e7534dc',
+    appId: '1:1014328533077:ios:d9acb440989891e7534dc',
     messagingSenderId: '1014328533077',
     projectId: 'appinventario-de2e8',
     storageBucket: 'appinventario-de2e8.firebasestorage.app',
-    iosClientId: '1014328533077-g0i3ksj8titc8hrj7brmd3j8ca18d7ks.apps.googleusercontent.com',
+    iosClientId:
+        '1014328533077-g0i3ksj8titc8hrj7brmd3j8ca18d7ks.apps.googleusercontent.com',
     iosBundleId: 'com.example.inventoryapp',
   );
 
@@ -88,16 +92,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'appinventario-de2e8.firebasestorage.app',
     measurementId: 'G-SQLDVP35ZJ',
   );
-
-  hola_mundo() {
-    print("Hola Mundo");
-  }
-}
-
-hola_mundo() {
-  print("Hola Mundo");
-}
-
-asd() {
-  print("asd");
 }
