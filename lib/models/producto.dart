@@ -8,15 +8,16 @@ class Producto {
   final int stock; // composición → lista de variantes, valor por defecto 0
 
   Producto({
-    this.id,   // opcional para nuevos productos
+    required this.id, // opcional para nuevos productos
     required this.nombre,
     required this.precio,
     required this.modelos,
     this.stock = 0,
   });
 
-  String get name => nombre;  // getter para obtener el nombre, antes devolvia null
-  
+  String get name =>
+      nombre; // getter para obtener el nombre, antes devolvia null
+
   /// Crea una instancia cambiando solo los campos indicados
   Producto copyWith({
     String? id,
@@ -37,7 +38,6 @@ class Producto {
   //  FACTORY FROM FIRESTORE (des‑serialización)
 
   factory Producto.fromFirestore(String id, Map<String, dynamic> data) {
-
     // Seguridad ante campos ausentes o nulos
     final rawModelos = data['modelos'] as List<dynamic>? ?? [];
 
@@ -45,14 +45,12 @@ class Producto {
       id: id,
       nombre: data['nombre'] as String? ?? '',
       precio: (data['precio'] as num?)?.toDouble() ?? 0.0,
-      modelos: rawModelos      
+      modelos: rawModelos
           .map((m) => Modelo.fromMap(m as Map<String, dynamic>))
           .toList(),
       stock: data['stock'] ?? 0,
     );
   }
-
-  
 
   //  TO MAP (serialización) para guardar en Firestore
 
