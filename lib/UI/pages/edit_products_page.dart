@@ -3,11 +3,10 @@ import 'package:inventoryapp/models/producto.dart';
 import 'package:provider/provider.dart';
 import 'package:inventoryapp/providers/product_provider.dart';
 
-
 class EditProductPage extends StatefulWidget {
   final Producto? product; // null → modo crear
 
-  const EditProductPage({Key? key, this.product}) : super(key: key);
+  const EditProductPage({super.key, this.product});
 
   @override
   State<EditProductPage> createState() => _EditProductPageState();
@@ -33,10 +32,12 @@ class _EditProductPageState extends State<EditProductPage> {
 
     final newProduct = Producto(
       //se omite la id para que Firestore la genere automáticamente
+      id: '',
       nombre: _nombre,
       stock: _stock,
       precio: _precio,
-      modelos:[], // Lista vacía por defecto, hay que modificar para guardar modelos 
+      modelos:
+          [], // Lista vacía por defecto, hay que modificar para guardar modelos
     );
 
     final provider = context.read<ProductProvider>();
@@ -46,7 +47,8 @@ class _EditProductPageState extends State<EditProductPage> {
       await provider.updateProduct(newProduct);
     }
 
-    Navigator.of(context).pop(); // volver a la lista
+    if (!mounted) return;
+    Navigator.pop(context); // volver a la lista
   }
 
   @override
@@ -87,8 +89,9 @@ class _EditProductPageState extends State<EditProductPage> {
               TextFormField(
                 initialValue: _precio.toStringAsFixed(2),
                 decoration: const InputDecoration(labelText: 'Precio (€)'),
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
                 validator: (v) =>
                     double.tryParse(v ?? '') == null ? 'Número válido' : null,
                 onSaved: (v) => _precio = double.parse(v!),
