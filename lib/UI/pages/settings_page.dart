@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:inventoryapp/providers/theme_provider.dart';
+import 'package:inventoryapp/providers/register_provider.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   void _goToAccountInfo(BuildContext context) {
-    print("Navegando a la Información de la Cuenta...");
+
   }
 
-  void _logout(BuildContext context) {
-    print("Cerrando sesión del usuario...");
+    void _logout(BuildContext context) async {
+    final registerProvider = Provider.of<RegisterProvider>(context, listen: false);
+    await registerProvider.logout();
+
+    // Redirigir a la página de login y eliminar historial
+    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+
+    // Opcional: mostrar SnackBar confirmando cierre de sesión
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Sesión cerrada correctamente'),
+        backgroundColor: Colors.green,
+      ),
+    );
   }
 
   @override

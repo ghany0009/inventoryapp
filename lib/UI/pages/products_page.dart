@@ -59,7 +59,7 @@ class _ProductsPageState extends State<ProductsPage> {
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -108,7 +108,7 @@ class _ProductsPageState extends State<ProductsPage> {
                 FloatingActionButton(
                   heroTag: 'eliminar_fab', // Tag único para cada FAB
                   onPressed: () {
-                    print('Eliminar presionado');
+
                     // Lógica para eliminar (requiere seleccionar un producto)
                   },
                   backgroundColor: Colors.red,
@@ -120,7 +120,7 @@ class _ProductsPageState extends State<ProductsPage> {
                 FloatingActionButton(
                   heroTag: 'editar_fab',
                   onPressed: () {
-                    print('Editar presionado');
+
                     // Lógica para editar (requiere seleccionar un producto)
                   },
                   backgroundColor: Colors.orange,
@@ -132,8 +132,6 @@ class _ProductsPageState extends State<ProductsPage> {
                 FloatingActionButton(
                   heroTag: 'crear_fab',
                   onPressed: () {
-                    print('Crear presionado');
-                    // Lógica para navegar a la pantalla de creación
                   },
                   backgroundColor: primary,
                   child: const Icon(Icons.add),
