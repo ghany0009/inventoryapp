@@ -114,6 +114,9 @@ class _ProductsPageState extends State<ProductsPage> {
                 // Botón Eliminar
                 FloatingActionButton(
                   heroTag: 'eliminar_fab', // Tag único para cada FAB
+                  onPressed: () {
+                    // Lógica para eliminar (requiere seleccionar un producto)
+                  },
                   backgroundColor: Colors.red,
                   onPressed:
                       _selected ==
@@ -137,6 +140,9 @@ class _ProductsPageState extends State<ProductsPage> {
                 // Botón Editar
                 FloatingActionButton(
                   heroTag: 'editar_fab',
+                  onPressed: () {
+                    // Lógica para editar (requiere seleccionar un producto)
+                  },
                   backgroundColor: Colors.orange,
                   onPressed: _selected == null
                       ? null //deshabilita el boton (lo pone gris)cuando el usuario no selecciona producto
@@ -159,16 +165,7 @@ class _ProductsPageState extends State<ProductsPage> {
                 // Botón Crear
                 FloatingActionButton(
                   heroTag: 'crear_fab',
-                  onPressed: () async {
-                    //navegamos a la pantalla de creación
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) =>
-                            const EditProductPage(), // <== Pantalla de creación
-                      ),
-                    );
-                  },
+                  onPressed: () {},
                   backgroundColor: primary,
                   child: const Icon(Icons.add),
                 ),

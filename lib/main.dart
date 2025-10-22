@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:inventoryapp/UI/pages/register_page.dart';
+import 'package:inventoryapp/providers/login_provider.dart';
 import 'package:inventoryapp/providers/product_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:inventoryapp/providers/theme_provider.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:inventoryapp/providers/register_provider.dart';
 // Importar paginas y temas
 import 'package:inventoryapp/UI/screens.dart';
 
@@ -30,8 +33,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ProductProvider>(
-          create: (_) => ProductProvider(),
-        ),
+          create: (_) => ProductProvider(),),
+        ChangeNotifierProvider<RegisterProvider>(
+          create: (_) => RegisterProvider()),
+        ChangeNotifierProvider<LoginProvider>(
+          create: (_) => LoginProvider()),        
         // Ejemplo de cómo añadir otro provider:
         // ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
       ],
@@ -54,6 +60,7 @@ class MyApp extends StatelessWidget {
                 '/': (context) => const WelcomePage(),
                 '/login': (context) => const LoginPage(),
                 '/selection': (context) => const SelectionPage(),
+                '/register': (context) => const RegisterPage(),
                 // ...otras rutas
               },
             );
