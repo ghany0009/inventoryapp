@@ -108,7 +108,7 @@ class ProductProvider with ChangeNotifier {
       // 2. Crear el objeto de movimiento para el historial
       final movimiento = Movimiento(
         id: '', // Firestore lo genera automáticamente
-        productoId: producto.id,
+        productoId: producto.id!, //añadida la ! porque id no puede ser nulo aqui
         productoNombre: producto.nombre,
         tipo: tipo,
         cantidad: cantidad,

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:inventoryapp/providers/product_provider.dart';
+import 'package:inventoryapp/models/producto.dart';
+import 'package:provider/provider.dart';
+import 'package:inventoryapp/UI/pages/edit_products_page.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -9,6 +13,7 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
+  Producto? _selected; // Variable para rastrear el producto seleccionado
   @override
   Widget build(BuildContext context) {
     final onSurface = Theme.of(context).colorScheme.onSurface;
@@ -59,7 +64,9 @@ class _ProductsPageState extends State<ProductsPage> {
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -81,7 +88,7 @@ class _ProductsPageState extends State<ProductsPage> {
                               "$stock ${stock == 1 ? 'unidad' : 'unidades'}",
                               style: TextStyle(
                                 fontSize: 16,
-                                color: onSurface.withOpacity(0.7),
+                                color: onSurface.withValues(alpha: 0.7),
                               ),
                             ),
                             Text(
@@ -107,11 +114,22 @@ class _ProductsPageState extends State<ProductsPage> {
                 // Botón Eliminar
                 FloatingActionButton(
                   heroTag: 'eliminar_fab', // Tag único para cada FAB
-                  onPressed: () {
-                    print('Eliminar presionado');
-                    // Lógica para eliminar (requiere seleccionar un producto)
-                  },
                   backgroundColor: Colors.red,
+                  onPressed:
+                      _selected ==
+                          null //<= nombre de la variable de selección                  _selected == null //<= nombre de la variable de selección
+                      ? null //boton gris si no responde
+                      : () async {
+                          //obtener la instancia del provider
+                          final productProvider = context
+                              .read<ProductProvider>();
+
+                          await productProvider.deleteProduct(_selected!.id!);
+                          //Borra el doc en Firestore via provider
+
+                          setState(() => _selected = null);
+                          // Limpiar selección visual después de eliminar
+                        },
                   child: const Icon(Icons.delete),
                 ),
                 const SizedBox(width: 10),
@@ -119,11 +137,21 @@ class _ProductsPageState extends State<ProductsPage> {
                 // Botón Editar
                 FloatingActionButton(
                   heroTag: 'editar_fab',
-                  onPressed: () {
-                    print('Editar presionado');
-                    // Lógica para editar (requiere seleccionar un producto)
-                  },
                   backgroundColor: Colors.orange,
+                  onPressed: _selected == null
+                      ? null //deshabilita el boton (lo pone gris)cuando el usuario no selecciona producto
+                      : () async {
+                          // Navegar a la pantalla de edición con el producto seleccionado
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  EditProductPage(product: _selected!),
+                            ),
+                          );
+                          // Al volver, limpiamos la selección
+                          setState(() => _selected = null);
+                        },
                   child: const Icon(Icons.edit),
                 ),
                 const SizedBox(width: 10),
@@ -131,9 +159,15 @@ class _ProductsPageState extends State<ProductsPage> {
                 // Botón Crear
                 FloatingActionButton(
                   heroTag: 'crear_fab',
-                  onPressed: () {
-                    print('Crear presionado');
-                    // Lógica para navegar a la pantalla de creación
+                  onPressed: () async {
+                    //navegamos a la pantalla de creación
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            const EditProductPage(), // <== Pantalla de creación
+                      ),
+                    );
                   },
                   backgroundColor: primary,
                   child: const Icon(Icons.add),

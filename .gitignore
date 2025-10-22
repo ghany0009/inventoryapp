@@ -1,45 +1,116 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
+# macOS
 .DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+.AppleDouble
+.LSOverride
 
-# IntelliJ related
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# Vim / Emacs / Sublime / VS Code backups
+*~
+*.swp
+*.swo
+*.bak
+*.orig
+*.rej
+*.tmp
+*.temp
+*.log
+*.class
+*.pyc
+
+# JetBrains / IntelliJ / Android Studio
 *.iml
 *.ipr
 *.iws
 .idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
+# Uncomment if you want to keep VS Code settings in repo
 #.vscode/
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
+# Build outputs
 /build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/
+.pub/
+.pub-cache/
+.packages
+# Generated API docs
+**/doc/api/
+# Coverage reports
 /coverage/
 
-# Symbolication related
-app.*.symbols
+# Android specific
+/android/.gradle/
+/android/app/build/
+/android/app/debug/
+/android/app/profile/
+/android/app/release/
+/android/app/*.iml
+# iOS / macOS specific
+/ios/Pods/
+/ios/.symlinks/
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Flutter.podspec
+/ios/Flutter/App.framework
+/ios/Flutter/engine/
+/ios/Runner.xcworkspace/
+/macos/.dart_tool/
+/macos/Flutter/GeneratedPluginRegistrant.swift
 
-# Obfuscation related
+# Web specific
+/web/.dart_tool/
+/web/.packages
+/web/build/
+/web/manifest.json
+/web/index.html
+/web/favicon.png
+/web/icons/
+/web/assets/
+/web/versions/
+/web/**/*.generated/
+/web/**/*.flutter_assets/
+/web/**/*.packages/
+/web/**/*.scripts/
+/web/**/*.styles/
+/web/**/*.icons/
+/web/**/*.fonts/
+/web/**/*.images/
+/web/**/*.manifest.json
+
+# Generated files (Freezed, JsonSerializable, protobuf, etc.)
+*.generated.dart
+*.g.dart
+*.freezed.dart
+*.gr.dart
+*.pb.dart
+*.pbjson.dart
+*.pbenum.dart
+*.proto
+
+node_modules/
+npm-debug.log*
+yarn-error.log*
+yarn.lock
+package-lock.json   # <-- Si NO usas npm en este proyecto, comenta esta línea
+pnpm-lock.yaml
+.pnpm-debug.log
+
+# Symbolication / Obfuscation (if you ever generate these)
+app.*.symbols
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Android Studio specific
+/.android/
+# Gradle caches (already covered by /android/.gradle/, but just in case)
+.gradle/
+# Misc temporary folders
+/tmp/
+temp/
+.cache/
